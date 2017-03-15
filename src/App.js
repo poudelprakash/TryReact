@@ -2,7 +2,8 @@ import React, {Component} from 'react';
 
 export default class App extends Component{
     render(){
-        return <h1>Hello App</h1>
+        let txt = this.props.txt;
+        return <h1>{txt}</h1>
     }
 }
 
