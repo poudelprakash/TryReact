@@ -5,3 +5,5 @@ export default class App extends Component{
         return <h1>Hello App</h1>
     }
 }
+
+{/*exprt default const App = () => <h1>Hello stateless</h1>*/}
