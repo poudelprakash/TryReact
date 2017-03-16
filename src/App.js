@@ -7,14 +7,16 @@ export default class App extends Component {
     }
 
     update() {
-        this.setState({a: this.refs.a.value,
-            b: this.refs.b.value});
+        this.setState({
+            a: this.a.value,
+            b: this.refs.b.value
+        });
     }
 
     render() {
         return <div>
             <input type="text"
-                   ref="a"
+                   ref={node=> this.a = node}
                    onChange={this.update.bind(this)}/>
             {this.state.a}
             <hr/>
