@@ -15,7 +15,9 @@ export default class App extends Component {
     render() {
         let txt = this.state.txt;
         return <div>
-            <input type="text" onChange={this.update.bind(this)}/>
+            <Widget update={this.update.bind(this)} />
+            <Widget update={this.update.bind(this)} />
+            <Widget update={this.update.bind(this)} />
             <h1>{txt}</h1>
             <h2>{this.props.txt}</h2>
         </div>
@@ -30,6 +32,8 @@ App.propTypes = {
 App.defaultProps = {
     txt: 'This is default value'
 };
+
+const Widget = (props)=> <input type="text" onChange={props.update}/>
 
 {/*exprt default const App = () => <h1>Hello stateless</h1>*/
 }
