@@ -1,33 +1,53 @@
 import React, {Component} from 'react';
 
-export  default class App extends Component {
-    constructor() {
+const HOC =(InnerComponent)=> class extends Component{
+    constructor(){
         super();
-        this.state = {items: []}
+        this.state = {count: 0}
     }
-
-    componentWillMount() {
-        fetch('http://swapi.co/api/people/?format=json').then(response => response.json()).then(
-            ({results: items}) => this.setState({items})
-        )
+    componentWillMount(){
+        console.log('will mount')
     }
-
-    filter(e) {
-        this.setState({filter: e.target.value})
+    render(){
+        return <InnerComponent
+            {...this.props}
+            {...this.state}
+            update={this.update.bind(this)}
+        />
     }
+    update(){
+this.setState({count: this.state.count+1})
+    }
+};
 
+export default class App extends Component {
     render() {
-        let items = this.state.items;
-        if (this.state.filter) {
-            items = items.filter(item => {
-                return item.name.toLowerCase().includes(this.state.filter.toLowerCase())
-            })
-        }
-        return (<div>
-            <input type="text" onChange={this.filter.bind(this)}/>
-            {items.map(item => <Person key={item.name} person={item}/>)}
-        </div>)
+        return (
+            <div>
+                <Button>Button</Button>
+                <hr/>
+                <LabelHoc>Label</LabelHoc>
+            </div>
+        )
     }
 }
 
-const Person = (props) => <h4>{props.person.name}</h4>
+const Button = HOC((props) => <button onClick={props.update}>
+    {props.children} - {props.count}
+    </button>);
+
+class Label extends Component {
+    componentWillMount(){
+     console.log('label will mount')
+    }
+    render() {
+        return (
+            <label onMouseMove={this.props.update}>
+                {this.props.children} - {this.props.count}
+
+            </label>
+        )
+    }
+}
+
+const LabelHoc = HOC(Label);
