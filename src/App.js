@@ -12,10 +12,19 @@ export  default class App extends Component {
         )
     }
 
+    filter(e) {
+        this.setState({filter: e.target.value})
+    }
+
     render() {
         let items = this.state.items;
+        if (this.state.filter) {
+            items = items.filter(item => {
+                return item.name.toLowerCase().includes(this.state.filter.toLowerCase())
+            })
+        }
         return (<div>
-
+            <input type="text" onChange={this.filter.bind(this)}/>
             {items.map(item => <Person key={item.name} person={item}/>)}
         </div>)
     }
