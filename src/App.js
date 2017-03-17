@@ -17,6 +17,9 @@ export default class App extends Component {
     shouldComponentUpdate(nextProps, nextState){
         return nextProps.val % 5 === 0;
     }
+    componentDidUpdate(prevProps, prevState){
+        console.log(`prevProps: ${prevProps.val}` )
+    }
 
     render() {
         console.log(this.state.increasing);
