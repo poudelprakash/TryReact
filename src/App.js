@@ -1,26 +1,22 @@
 import React, {
     Component,
+    PropTypes,
 } from 'react';
+
+import Buttons from './components/Buttons'
 
 class App extends Component {
     render() {
         return (
-            <Parent>
-                <div className="childA"></div>
-                <div className="childB"></div>
-            </Parent>
+            <Buttons>
+                <button value="A">A</button>
+                <button value="B">B</button>
+                <button value="C">C</button>
+            </Buttons>
         );
     }
 }
 
-class Parent extends Component {
-    render() {
-        // let items = this.props.children;
-       let items = React.Children.toArray(this.props.children).map(child=> child.props.className);
-        console.log(items);
-        return null;
-    }
-}
 
 App.propTypes = {};
 App.defaultProps = {};
