@@ -1,22 +1,25 @@
 import React, {Component} from 'react';
 
-const HOC =(InnerComponent)=> class extends Component{
-    constructor(){
+const HOC = (InnerComponent) => class extends Component {
+    constructor() {
         super();
         this.state = {count: 0}
     }
-    componentWillMount(){
+
+    componentWillMount() {
         console.log('will mount')
     }
-    render(){
+
+    render() {
         return <InnerComponent
             {...this.props}
             {...this.state}
             update={this.update.bind(this)}
         />
     }
-    update(){
-this.setState({count: this.state.count+1})
+
+    update() {
+        this.setState({count: this.state.count + 1})
     }
 };
 
@@ -34,12 +37,13 @@ export default class App extends Component {
 
 const Button = HOC((props) => <button onClick={props.update}>
     {props.children} - {props.count}
-    </button>);
+</button>);
 
 class Label extends Component {
-    componentWillMount(){
-     console.log('label will mount')
+    componentWillMount() {
+        console.log('label will mount')
     }
+
     render() {
         return (
             <label onMouseMove={this.props.update}>
